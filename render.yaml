@@ -1,0 +1,41 @@
+# ── Render.com deployment config ──────────────────────────────────────────────
+# Docs: https://render.com/docs/blueprint-spec
+#
+# This deploys the ITMS Bug Tracker as a single Web Service:
+#   - Express API  (Node 20)
+#   - React SPA    (served as static files from the same process)
+#
+# After deploying, point your custom domain in:
+#   Render Dashboard → Your Service → Settings → Custom Domains
+# ──────────────────────────────────────────────────────────────────────────────
+
+services:
+  - type: web
+    name: itms-bug-tracker
+    runtime: node
+    region: oregon             # change to 'frankfurt' or 'singapore' if preferred
+    plan: free                 # upgrade to 'starter' for always-on (no cold starts)
+
+    # Render runs commands from the repo root
+    rootDir: server
+
+    # 1. Build step — install server deps AND build the React client
+    buildCommand: npm install && npm run build:client
+
+    # 2. Start step — serve API + React static files
+    startCommand: node index.js
+
+    # Environment variables set in the Render dashboard
+    # (or add them here as envVars — avoid committing secrets)
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000           # Render exposes this port automatically
+      - key: CLIENT_ORIGIN
+        # Replace with your actual Render URL after first deploy, e.g.:
+        # https://itms-bug-tracker.onrender.com
+        value: https://itms-bug-tracker.onrender.com
+
+    # Health check
+    healthCheckPath: /api/dashboard

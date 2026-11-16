@@ -1,0 +1,180 @@
+.bug-list-page { display: flex; flex-direction: column; gap: 16px; height: 100%; }
+
+.bug-list__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Search */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px 7px 30px;
+  font-size: 13px;
+  color: var(--text-primary);
+  width: 220px;
+  transition: border-color var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* Status tabs */
+.status-tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.status-tab {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+
+.status-tab:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+
+.status-tab--active {
+  background: var(--accent-muted);
+  color: var(--accent-hover);
+}
+
+.status-tab__count {
+  background: var(--border);
+  color: var(--text-muted);
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 8px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.status-tab--active .status-tab__count {
+  background: rgba(56,139,253,0.2);
+  color: var(--accent-hover);
+}
+
+/* Table */
+.bug-table-wrap {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  flex: 1;
+}
+
+.bug-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.bug-table__th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.bug-table__th--sortable {
+  cursor: pointer;
+  display: table-cell;
+}
+
+.bug-table__th--sortable:hover,
+.bug-table__th--sortable.active { color: var(--text-primary); }
+
+.bug-table__th--sortable span { display: inline-flex; align-items: center; gap: 4px; }
+
+.bug-table__row {
+  cursor: pointer;
+  transition: background var(--transition);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.bug-table__row:last-child { border-bottom: none; }
+
+.bug-table__row:hover { background: var(--bg-card-hover); }
+
+.bug-table__td { padding: 11px 14px; color: var(--text-secondary); vertical-align: middle; }
+
+.bug-table__id { font-family: monospace; font-size: 11px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.bug-table__title { font-weight: 500; color: var(--text-primary); max-width: 320px; }
+.bug-table__time  { white-space: nowrap; font-size: 12px; }
+
+.bug-table__assignee {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.bug-table__empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.text-muted { color: var(--text-muted); }
+
+/* ── Delete row button ───────────────────────────────────────────────────── */
+.bug-table__th--action { width: 40px; }
+.bug-table__td--action { width: 40px; padding: 0 8px; }
+
+.del-row-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+
+/* Show delete button when row is hovered */
+.bug-table__row:hover .del-row-btn { opacity: 1; }
+
+.del-row-btn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}

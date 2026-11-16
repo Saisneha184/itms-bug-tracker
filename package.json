@@ -1,0 +1,21 @@
+{
+  "name": "itms-bug-tracking-agent",
+  "version": "1.0.0",
+  "description": "ITMS Bug Tracking Agent with full lifecycle management (Open → Assigned → Fixed → Closed / Reopened)",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start":      "node src/index.js",
+    "dev":        "node --watch src/index.js",
+    "seed":       "node src/seed.js",
+    "server":     "cd server && node index.js",
+    "client":     "cd client && npx vite",
+    "ui:build":   "cd client && npm run build"
+  },
+  "dependencies": {
+    "uuid": "^11.0.3",
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.15",
+    "date-fns": "^3.3.1"
+  }
+}
