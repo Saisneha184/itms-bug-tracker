@@ -5,7 +5,7 @@ import { Avatar } from '../components/Avatar.jsx';
 import { Modal } from '../components/Modal.jsx';
 import { BugDetail } from '../components/BugDetail.jsx';
 import { DeleteBugModal } from '../components/DeleteBugModal.jsx';
-import { STATUS_META, TRANSITIONS } from '../constants.js';
+import { STATUS_META, TRANSITIONS, CURRENT_USER_ID } from '../constants.js';
 import { Plus, GripVertical } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Board.css';
@@ -67,9 +67,9 @@ export function Board() {
       if (col === 'Assigned') {
         const dev = devs[0];
         if (!dev) return;
-        updated = await assignBug(bugId, { assignedTo: dev.id, byUserId: 'u1' });
+        updated = await assignBug(bugId, { assignedTo: dev.id, byUserId: CURRENT_USER_ID });
       } else {
-        updated = await transitionBug(bugId, { toStatus: col, byUserId: 'u1' });
+        updated = await transitionBug(bugId, { toStatus: col, byUserId: CURRENT_USER_ID });
       }
       setBugs(bs => bs.map(b => b.id === updated.id ? updated : b));
     } catch (_) {}

@@ -1,3 +1,7 @@
+// The user the app acts as (used as `byUserId` on every change) until real login exists.
+// Keep this user in the server's seed data and don't delete them from the Team page.
+export const CURRENT_USER_ID = 'u1';
+
 export const STATUS = {
   OPEN:     'Open',
   ASSIGNED: 'Assigned',

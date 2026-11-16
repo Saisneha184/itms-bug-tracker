@@ -4,7 +4,7 @@ import { MessageCircle, Clock, ArrowRight, Trash2 } from 'lucide-react';
 import { StatusBadge, PriorityBadge, SeverityBadge } from './Badge.jsx';
 import { Avatar } from './Avatar.jsx';
 import { assignBug, transitionBug, addComment } from '../api.js';
-import { TRANSITIONS } from '../constants.js';
+import { TRANSITIONS, CURRENT_USER_ID } from '../constants.js';
 import { Timeline } from './Timeline.jsx';
 import './BugDetail.css';
 
@@ -29,9 +29,9 @@ export function BugDetail({ bug: initialBug, users, developers, onUpdate, onDele
       if (toStatus === 'Assigned') {
         const dev = developers[0];
         if (!dev) throw new Error('No developers available');
-        updated = await assignBug(bug.id, { assignedTo: dev.id, byUserId: 'u1' });
+        updated = await assignBug(bug.id, { assignedTo: dev.id, byUserId: CURRENT_USER_ID });
       } else {
-        updated = await transitionBug(bug.id, { toStatus, byUserId: 'u1' });
+        updated = await transitionBug(bug.id, { toStatus, byUserId: CURRENT_USER_ID });
       }
       setBug(updated);
       onUpdate(updated);
@@ -44,7 +44,7 @@ export function BugDetail({ bug: initialBug, users, developers, onUpdate, onDele
     if (!devId) return;
     setWorking(true); setError('');
     try {
-      const updated = await assignBug(bug.id, { assignedTo: devId, byUserId: 'u1' });
+      const updated = await assignBug(bug.id, { assignedTo: devId, byUserId: CURRENT_USER_ID });
       setBug(updated);
       onUpdate(updated);
     } catch (e) { setError(e.message); }
