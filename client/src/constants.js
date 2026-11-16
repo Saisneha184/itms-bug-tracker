@@ -4,14 +4,18 @@ export const STATUS = {
   FIXED:    'Fixed',
   CLOSED:   'Closed',
   REOPENED: 'Reopened',
+  REJECTED:    'Rejected',
+  TRANSFERRED: 'Transferred',
 };
 
 export const TRANSITIONS = {
-  Open:     ['Assigned', 'Closed'],
-  Assigned: ['Fixed', 'Reopened', 'Open'],
-  Fixed:    ['Closed', 'Reopened'],
-  Closed:   ['Reopened'],
-  Reopened: ['Assigned', 'Fixed', 'Closed'],
+  Open:        ['Assigned', 'Closed', 'Rejected', 'Transferred'],
+  Assigned:    ['Fixed', 'Reopened', 'Open'],
+  Fixed:       ['Closed', 'Reopened'],
+  Closed:      ['Reopened'],
+  Reopened:    ['Assigned', 'Fixed', 'Closed'],
+  Rejected:    ['Reopened'],
+  Transferred: ['Open', 'Assigned'],
 };
 
 export const STATUS_META = {
@@ -20,6 +24,8 @@ export const STATUS_META = {
   Fixed:    { color: '#06b6d4', bg: 'rgba(6,182,212,0.15)',   label: 'Fixed'    },
   Closed:   { color: '#22c55e', bg: 'rgba(34,197,94,0.15)',   label: 'Closed'   },
   Reopened: { color: '#ef4444', bg: 'rgba(239,68,68,0.15)',   label: 'Reopened' },
+  Rejected:    { color: '#8b5cf6', bg: 'rgba(139,92,246,0.15)', label: 'Rejected'    },
+  Transferred: { color: '#ec4899', bg: 'rgba(236,72,153,0.15)', label: 'Transferred' },
 };
 
 export const PRIORITY_META = {

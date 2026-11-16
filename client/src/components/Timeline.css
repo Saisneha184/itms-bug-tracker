@@ -1,0 +1,133 @@
+/* ── Bug timeline (status dates + durations) ──────────────────────────────── */
+
+.timeline {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.timeline__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.timeline__subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 16px 0 8px;
+}
+
+.timeline__total {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.timeline__label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.timeline__value {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.timeline__hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.timeline__milestones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.timeline__milestone {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.timeline__dates {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timeline__dates li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.timeline__dates time,
+.timeline__entry-head time {
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline__log {
+  list-style: none;
+  border-left: 2px solid var(--border);
+  margin-left: 6px;
+  padding-left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.timeline__entry {
+  position: relative;
+}
+
+.timeline__entry::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline__entry-head {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.timeline__change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.timeline__entry-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}

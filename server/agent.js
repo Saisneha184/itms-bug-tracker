@@ -3,6 +3,11 @@ import {
   getAllBugs, getBugStats, getUserById, getDevelopers, deleteBug,
 } from './store.js';
 import { STATUS, TRANSITIONS, PRIORITY, SEVERITY } from './constants.js';
+import { buildTimeline } from './timeline.js';
+
+// Attach the derived timeline (status dates + durations) to a bug for the API.
+// Returns a copy so the stored bug is never mutated.
+const withTimeline = bug => ({ ...bug, timeline: buildTimeline(bug) });
 
 function assertBug(id)    { const b = getBugById(id); if (!b) throw new Error(`Bug "${id}" not found`); return b; }
 function assertUser(id)   { const u = getUserById(id); if (!u) throw new Error(`User "${id}" not found`); return u; }
@@ -26,22 +31,22 @@ export function agentAssignBug({ bugId, assignedTo, byUserId, comment }) {
   const devIds = getDevelopers().map(d => d.id);
   if (!devIds.includes(assignedTo)) throw new Error(`${assignedTo} is not a developer`);
   assertUser(byUserId);
-  return updateBugStatus(bugId, {
+  return withTimeline(updateBugStatus(bugId, {
     newStatus: STATUS.ASSIGNED, byUserId, assignedTo,
     comment: comment || `Assigned to ${getUserById(assignedTo).name}.`,
-  });
+  }));
 }
 
 export function agentTransition({ bugId, toStatus, byUserId, assignedTo, comment }) {
   const bug = assertBug(bugId);
   assertTransition(bug, toStatus);
   assertUser(byUserId);
-  return updateBugStatus(bugId, {
+  return withTimeline(updateBugStatus(bugId, {
     newStatus:  toStatus,
     byUserId,
     assignedTo: toStatus === STATUS.REOPENED ? null : assignedTo,
     comment,
-  });
+  }));
 }
 
 export function agentComment({ bugId, userId, text }) {
@@ -51,7 +56,7 @@ export function agentComment({ bugId, userId, text }) {
   return addComment(bugId, { userId, text });
 }
 
-export const agentGetBug     = id => assertBug(id);
-export const agentListBugs   = f  => getAllBugs(f);
+export const agentGetBug     = id => withTimeline(assertBug(id));
+export const agentListBugs   = f  => getAllBugs(f).map(withTimeline);
 export const agentDashboard  = ()  => getBugStats();
 export const agentDeleteBug  = id  => { assertBug(id); return deleteBug(id); };

@@ -10,7 +10,7 @@ import { Plus, GripVertical } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Board.css';
 
-const COLUMNS = ['Open', 'Assigned', 'Fixed', 'Closed', 'Reopened'];
+const COLUMNS = ['Open', 'Assigned', 'Fixed', 'Closed', 'Reopened', 'Rejected', 'Transferred'];
 
 export function Board() {
   const [bugs,     setBugs]     = useState([]);

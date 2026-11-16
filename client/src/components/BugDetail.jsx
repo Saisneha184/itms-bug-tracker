@@ -5,6 +5,7 @@ import { StatusBadge, PriorityBadge, SeverityBadge } from './Badge.jsx';
 import { Avatar } from './Avatar.jsx';
 import { assignBug, transitionBug, addComment } from '../api.js';
 import { TRANSITIONS } from '../constants.js';
+import { Timeline } from './Timeline.jsx';
 import './BugDetail.css';
 
 function fmt(d) { return d ? format(new Date(d), 'dd MMM yyyy, HH:mm') : '—'; }
@@ -120,6 +121,9 @@ export function BugDetail({ bug: initialBug, users, developers, onUpdate, onDele
           <h3 id="desc-heading" className="bug-detail__section-title">Description</h3>
           <p className="bug-detail__desc">{bug.description || <span className="text-muted">No description provided.</span>}</p>
         </section>
+
+        {/* Status dates & durations */}
+        <Timeline timeline={bug.timeline} users={users} />
 
         {/* Activity / History */}
         <section className="bug-detail__section" aria-labelledby="activity-heading">
