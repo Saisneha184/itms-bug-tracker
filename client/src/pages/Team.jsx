@@ -9,6 +9,7 @@ import {
   MoreVertical, Users, ChevronDown, Filter,
 } from 'lucide-react';
 import { format } from 'date-fns';
+import { CURRENT_USER_ID } from '../constants.js';
 import './Team.css';
 
 const ROLES       = ['Manager', 'Developer', 'QA', 'Reporter'];
@@ -190,7 +191,7 @@ export function Team() {
                       <button role="menuitem" className="kebab-item" onClick={() => { setModal({ type: 'edit', user }); setMenuOpen(null); }}>
                         <Edit2 size={13} /> Edit Member
                       </button>
-                      <button role="menuitem" className="kebab-item kebab-item--danger" onClick={() => { setModal({ type: 'delete', user }); setMenuOpen(null); }}>
+                      <button role="menuitem" className="kebab-item kebab-item--danger" disabled={user.id === CURRENT_USER_ID} title={user.id === CURRENT_USER_ID ? 'You cannot remove the account the app runs as' : undefined} onClick={() => { setModal({ type: 'delete', user }); setMenuOpen(null); }}>
                         <Trash2 size={13} /> Remove
                       </button>
                     </div>
@@ -321,7 +322,7 @@ export function Team() {
                       <button className="icon-btn" title="Edit" onClick={() => setModal({ type: 'edit', user })} aria-label={`Edit ${user.name}`}>
                         <Edit2 size={13} />
                       </button>
-                      <button className="icon-btn icon-btn--danger" title="Remove" onClick={() => setModal({ type: 'delete', user })} aria-label={`Remove ${user.name}`}>
+                      <button className="icon-btn icon-btn--danger" title="Remove" disabled={user.id === CURRENT_USER_ID} onClick={() => setModal({ type: 'delete', user })} aria-label={`Remove ${user.name}`}>
                         <Trash2 size={13} />
                       </button>
                     </td>

@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 import { Search, Plus, ChevronUp, ChevronDown, Trash2 } from 'lucide-react';
 import './BugList.css';
 
-const STATUSES = ['All', 'Open', 'Assigned', 'Fixed', 'Closed', 'Reopened'];
+const STATUSES = ['All', 'Open', 'Assigned', 'Fixed', 'Closed', 'Reopened', 'Rejected', 'Transferred'];
 
 export function BugList() {
   const [searchParams, setSearchParams] = useSearchParams();

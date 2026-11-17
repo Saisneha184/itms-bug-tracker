@@ -4,15 +4,17 @@ import { fetchDashboard, fetchBugs } from '../api.js';
 import { StatusBadge, PriorityBadge } from '../components/Badge.jsx';
 import { STATUS_META } from '../constants.js';
 import { format } from 'date-fns';
-import { TrendingUp, Bug, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import { TrendingUp, Bug, CheckCircle, AlertCircle, RefreshCw, XCircle, ArrowRightLeft } from 'lucide-react';
 import './Dashboard.css';
 
 const STAT_ICONS = {
-  Open:     <Bug size={18} />,
-  Assigned: <TrendingUp size={18} />,
-  Fixed:    <CheckCircle size={18} />,
-  Closed:   <CheckCircle size={18} />,
-  Reopened: <RefreshCw size={18} />,
+  Open:        <Bug size={18} />,
+  Assigned:    <TrendingUp size={18} />,
+  Fixed:       <CheckCircle size={18} />,
+  Closed:      <CheckCircle size={18} />,
+  Reopened:    <RefreshCw size={18} />,
+  Rejected:    <XCircle size={18} />,
+  Transferred: <ArrowRightLeft size={18} />,
 };
 
 export function Dashboard() {
@@ -33,7 +35,7 @@ export function Dashboard() {
 
   if (loading) return <div className="page-loading" aria-live="polite">Loading dashboard…</div>;
 
-  const statusOrder = ['Open', 'Assigned', 'Fixed', 'Closed', 'Reopened'];
+  const statusOrder = ['Open', 'Assigned', 'Fixed', 'Closed', 'Reopened', 'Rejected', 'Transferred'];
 
   return (
     <div className="dashboard">
@@ -125,7 +127,7 @@ export function Dashboard() {
 
 /* Simple SVG donut chart */
 function DonutChart({ stats, total }) {
-  const statusOrder = ['Open', 'Assigned', 'Fixed', 'Closed', 'Reopened'];
+  const statusOrder = ['Open', 'Assigned', 'Fixed', 'Closed', 'Reopened', 'Rejected', 'Transferred'];
   const r = 60, cx = 70, cy = 70, stroke = 20;
   const circumference = 2 * Math.PI * r;
   if (total === 0) return <svg width="140" height="140"><circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--border)" strokeWidth={stroke}/></svg>;
